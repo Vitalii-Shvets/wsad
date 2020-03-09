@@ -1,6 +1,6 @@
 <table border="1" width="100%" cellpadding="5">
-    <tr>
-        <th>First name</th>
+    <tr id="fname-sort">
+        <th data-id="324">First name</th>
         <th>Last name</th>
         <th>Email</th>
         <th>Phone</th>
@@ -14,6 +14,16 @@
         <td>1</td>
         <td>1</td>
         <td>1</td>
-        <td>1</td>
+        <td><button data-id="1">primer</button></td>
     </tr>
 </table>
+<script>
+    window.onload=function() {
+
+        document.getElementById('fname-sort').addEventListener('click', (e) => {
+            console.log(e.target.dataset.id)
+        });
+
+    }
+
+</script>

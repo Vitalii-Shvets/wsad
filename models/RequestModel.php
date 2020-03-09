@@ -41,8 +41,35 @@ class RequestModel
         $doc->save('requests.xml');
     }
 
-    public static function getXML()
+    public static function getXML($name, $order)
     {
+        $xml = simplexml_load_file('requests.xml');
+        $res = [];
+        foreach ($xml->request as $item) {
+            $res[] = [
+                'fname' => (string)$item->fname,
+                'lname' => (string)$item->lname,
+                'email' => (string)$item->email,
+                'tel' => (string)$item->tel,
+            ];
+        }
 
+        if ($name !== null && $order !== null) {
+            $res = RequestModel::sortArrCol($res, $name, $order);
+        }
+        return $res;
+    }
+
+    private static function sortArrCol($arr, $nameColumn, $order)
+    {
+        $columnSort = array_column($arr, $nameColumn);
+
+        array_multisort($columnSort, RequestModel::getNumberSort($order), $arr);
+        return $arr;
+    }
+
+    private static function getNumberSort($sort)
+    {
+        return ($sort == 'asc') ? SORT_ASC : SORT_DESC;
     }
 }

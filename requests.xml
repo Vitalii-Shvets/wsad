@@ -1,3 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<requests ids="2">
-<request id="0"><fname>123</fname><lname>23</lname><email>omelchak13o@gmail.com</email><tel>324234</tel></request></requests>
+<requests ids="4">
+<request id="2"><fname>Сергій</fname><lname>Швець</lname><email>omelchak13o@gmail.com</email><tel>4353453445</tel><picture>uploads/image/68586.jpg</picture></request><request id="3"><fname>Віталій</fname><lname>Швець</lname><email>omelchak13o@gmail.com</email><tel>4353453445</tel><picture>uploads/image/68586.jpg</picture></request></requests>

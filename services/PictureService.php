@@ -21,7 +21,7 @@ class PictureService
 
     public static function makeUpload($file)
     {
-        self::resize($file, 300, 300);
+       return self::resize($file, 300, 300);
     }
 
     private static function resize($file, $w_dest, $h_dest)
@@ -46,6 +46,6 @@ class PictureService
         imagedestroy($dest);
         imagedestroy($source);
 
-        return $file['name'];
+        return self::PATH . $file['name'];
     }
 }

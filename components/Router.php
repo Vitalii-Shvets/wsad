@@ -21,29 +21,33 @@ class Router
     {
         $uri = $this->getURI();
 
+
         foreach ($this->routes as $uriPattern => $path) {
-            if (!preg_match("~$uriPattern~", $uri)) {
-                continue;
-            }
 
-            $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
-            $segments = explode('/', $internalRoute);
-            $controllerName = array_shift($segments) . 'Controller';
-            $controllerName = ucfirst($controllerName);
-            $actionName = 'action' . ucfirst(array_shift($segments));
-            $parameters = $segments;
-            $controllerFile = ROOT . '/controllers/' . $controllerName . '.php';
+            if (preg_match("~$uriPattern~", $uri)) {
+                $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
 
-            if (file_exists($controllerFile)) {
-                include_once($controllerFile);
-            }
+                $segments = explode('/', $internalRoute);
+                $controllerName = array_shift($segments) . 'Controller';
+                $controllerName = ucfirst($controllerName);
+                $actionName = 'action' . ucfirst(array_shift($segments));
+                $parameters = $segments;
+                $controllerFile = ROOT . '/controllers/' .
+                    $controllerName . '.php';
 
-            $controllerObject = new $controllerName;
-            $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
+                if (file_exists($controllerFile)) {
+                    include_once($controllerFile);
+                }
 
-            if (!$result) {
-                break;
+                $controllerObject = new $controllerName;
+
+                $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
+
+                if ($result != null) {
+                    break;
+                }
             }
         }
     }
+
 }
